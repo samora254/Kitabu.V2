@@ -35,8 +35,8 @@ export const Learning: React.FC = () => {
     return <ErrorMessage message={error || 'Failed to load content'} />;
   }
 
-  const currentTopic = content.topics.find(t => t.id === selectedTopic);
-  const currentSubtopic = currentTopic?.subtopics.find(st => st.id === selectedSubtopic);
+  const currentTopic = content.topics.find((t: { id: string | null; }) => t.id === selectedTopic);
+  const currentSubtopic = currentTopic?.subtopics.find((st: { id: string | null; }) => st.id === selectedSubtopic);
 
   const handleTopicSelect = (topicId: string) => {
     setSelectedTopic(topicId);
@@ -85,7 +85,7 @@ export const Learning: React.FC = () => {
         {!selectedTopic ? (
           <div className="space-y-4">
             <h2 className="text-xl font-bold mb-4">Select a Topic</h2>
-            {content.topics.map(topic => (
+            {content.topics.map((topic: { id: any; title?: string; description?: string; }) => (
               <TopicCard
                 key={topic.id}
                 subjectId={subjectId || ''}
@@ -111,7 +111,7 @@ export const Learning: React.FC = () => {
             />
 
             <div className="grid gap-4 mt-6">
-              {currentTopic?.subtopics.map(subtopic => (
+              {currentTopic?.subtopics.map((subtopic: { id: any; title?: string; content?: string; }) => (
                 <SubtopicCard
                   key={subtopic.id}
                   subjectId={subjectId || ''}
